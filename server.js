@@ -34,7 +34,7 @@ var server=http.createServer(async (req,res) => {
 								}).toString();			
 				var strURLEncoded = encodeURIComponent(ciphertext)
 				
-				QRCode.toDataURL(strPref+strURLEncoded,{ errorCorrectionLevel: 'M' },
+				QRCode.toDataURL(strPref+strURLEncoded,{width: (JSON.parse(data).width || 300 ), errorCorrectionLevel: 'M' },
 									function (err, url) {
 										
 										// res.writeHead(200,{'Content-Type':'text/html ;charset=utf-8'});
