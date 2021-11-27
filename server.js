@@ -11,8 +11,6 @@ var server=http.createServer(async (req,res) => {
 			buffers.push(chunk);
 		}
 		const data = Buffer.concat(buffers).toString();
-
-		console.log(JSON.parse(data).todo); // 'Buy the milk'	
 	
         if(req.url=='/'){
             res.writeHead(200,{'Content-Type':'text/html'});
@@ -59,17 +57,13 @@ var server=http.createServer(async (req,res) => {
 											QRCode: url
 										});
 										res.end(json);										
-										
-										
-										
-										
-									})
-							
+
+									})							
 			}else {
 			  res.end('');
-			}	
-						
+			}							
 		}else
+			res.writeHead(404, {"Content-Type": "text/plain"});
             res.end('Invalid Request!');
 });
 const PORT = process.env.PORT || 3000;
