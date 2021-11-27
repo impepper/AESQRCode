@@ -63,7 +63,7 @@ var server=http.createServer(async (req,res) => {
 			  res.end('');
 			}							
 		}else
-			res.writeHead(404, {"Content-Type": "text/plain"});
+			// res.writeHead(404, {"Content-Type": "text/plain"});
             res.end('Invalid Request!');
 });
 const PORT = process.env.PORT || 3000;
