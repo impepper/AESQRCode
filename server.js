@@ -27,8 +27,8 @@ var server=http.createServer(async (req,res) => {
 				var strURLEncoded 
 					
 				strPref = (JSON.parse(data).preftext || '' )
-				originalText = (JSON.parse(data).encdata || 'Surname,Given Name,Mobile,')
-				AESKEY = CryptoJS.enc.Utf8.parse(JSON.parse(data).key ||'abcdefghijklmnop')
+				originalText = (JSON.parse(data).encdata || 'Info to be encoded')
+				AESKEY = CryptoJS.enc.Utf8.parse(JSON.parse(data).key ||'Encryption Key')
 				
 				ciphertext = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(originalText),AESKEY,{
 								  mode: CryptoJS.mode.ECB,
