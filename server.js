@@ -27,14 +27,15 @@ var server=http.createServer(async (req,res) => {
 				var strURLEncoded 
 					
 				strPref = (JSON.parse(data).preftext || '' )
-				originalText = CryptoJS.enc.Utf8.parse(JSON.parse(data).encdata || 'Surname,Given Name,Mobile,')
+				originalText = (JSON.parse(data).encdata || 'Surname,Given Name,Mobile,')
 				AESKEY = CryptoJS.enc.Utf8.parse(JSON.parse(data).key ||'abcdefghijklmnop')
 				
-				ciphertext = CryptoJS.AES.encrypt(originalText,AESKEY,{
+				ciphertext = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(originalText),AESKEY,{
 								  mode: CryptoJS.mode.ECB,
 								  padding: CryptoJS.pad.ZeroPadding
 								}).toString();			
 				var strURLEncoded = encodeURIComponent(ciphertext)
+				
 				QRCode.toDataURL(strPref+strURLEncoded,{ errorCorrectionLevel: 'M' },
 									function (err, url) {
 										// res.writeHead(200,{'Content-Type':'text/plain'});
@@ -51,11 +52,9 @@ var server=http.createServer(async (req,res) => {
 													// '"></body></html>');
 										res.write('Original TEXT:'+
 													originalText+
-													'<br / >Encoded Text:'+
-													ciphertext+
-													'<br / >URLEncoded Text:'+
-													strURLEncoded+						
-													'<br / >QRCode<br/><img alt="QRCode" src="'+
+													'<br / ><br / >Encoded Text:'+
+													ciphertext+					
+													'<br / ><br / >QRCode<br/><img alt="QRCode" src="'+
 													url+
 													'">');
 										res.end();
