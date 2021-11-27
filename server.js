@@ -27,25 +27,24 @@ var server=http.createServer(function(req,res){
 			var encQRCode
 			QRCode.toDataURL(strPref+strURLEncoded,{ errorCorrectionLevel: 'M' },
 								function (err, url) {
+									// res.writeHead(200,{'Content-Type':'text/plain'});
+									// res.write(url);
 									res.writeHead(200,{'Content-Type':'text/html'});
-									res.write(url);
-									// res.write('<html><body>Original TEXT:'+
-									// res.write('<html><body>Original TEXT:'+
-									// res.writeHead(200,{'Content-Type':'text/html'});
-									// res.write('<html><body>Original TEXT:'+
-												// originalText+
-												// '<br / >Encoded Text:'+
-												// ciphertext+
-												// '<br / >URLEncoded Text:'+
-												// strURLEncoded+						
-												// '<br / >QRCode<br/><img alt="Logo" src="'+
-												// url+
-												// '"></body></html>');
+									res.write('<html><body>Original TEXT:'+
+												originalText+
+												'<br / >Encoded Text:'+
+												ciphertext+
+												'<br / >URLEncoded Text:'+
+												strURLEncoded+						
+												'<br / >QRCode<br/><img alt="Logo" src="'+
+												url+
+												'"></body></html>');
+									res.end();
 								})
-						res.end
+						
 		}else
             res.end('Invalid Request!');
 });
- 
-server.listen(5000);
-console.log('Node.js web server at port 5000 is running..')
+const PORT = process.env.PORT || 3000;
+server.listen(PORT);
+console.log('Node.js web server at port '+PORT+' is running..')
