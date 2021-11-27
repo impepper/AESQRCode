@@ -22,12 +22,7 @@ var server=http.createServer(function(req,res){
 			var ciphertext = CryptoJS.AES.encrypt(originalText,AESKEY,{
 							  mode: CryptoJS.mode.ECB,
 							  padding: CryptoJS.pad.ZeroPadding
-							}).toString();
-
-
-			
-			//console.log(originalText); // 'my message'
-			
+							}).toString();			
 			var strURLEncoded = encodeURIComponent(ciphertext)
 			var encQRCode
 			QRCode.toDataURL(strPref+strURLEncoded,{ errorCorrectionLevel: 'M' },
@@ -48,12 +43,8 @@ var server=http.createServer(function(req,res){
 												// '"></body></html>');
 								})
 						res.end
-
-
-
 		}else
             res.end('Invalid Request!');
- 
 });
  
 server.listen(5000);
