@@ -38,26 +38,31 @@ var server=http.createServer(async (req,res) => {
 				
 				QRCode.toDataURL(strPref+strURLEncoded,{ errorCorrectionLevel: 'M' },
 									function (err, url) {
-										// res.writeHead(200,{'Content-Type':'text/plain'});
+										
+										// res.writeHead(200,{'Content-Type':'text/html ;charset=utf-8'});
 										// res.write(url);
-										res.writeHead(200,{'Content-Type':'text/html'});
-										// res.write('<html><body>Original TEXT:'+
+										
+										// res.writeHead(200,{'Content-Type':'text/html ;charset=utf-8'});												
+										// res.write('Original TEXT:'+
 													// originalText+
-													// '<br / >Encoded Text:'+
-													// ciphertext+
-													// '<br / >URLEncoded Text:'+
-													// strURLEncoded+						
-													// '<br / >QRCode<br/><img alt="Logo" src="'+
+													// '<br / ><br / >Encoded Text:'+
+													// ciphertext+					
+													// '<br / ><br / >QRCode<br/><img alt="QRCode" src="'+
 													// url+
-													// '"></body></html>');
-										res.write('Original TEXT:'+
-													originalText+
-													'<br / ><br / >Encoded Text:'+
-													ciphertext+					
-													'<br / ><br / >QRCode<br/><img alt="QRCode" src="'+
-													url+
-													'">');
-										res.end();
+													// '">');
+										// res.end();
+										
+										res.writeHead(200, {"Content-Type": "application/json; charset=utf-8"});
+										var json = JSON.stringify({ 
+											encData: originalText, 
+											ciphertext: ciphertext, 
+											QRCode: url
+										});
+										res.end(json);										
+										
+										
+										
+										
 									})
 							
 			}else {
